@@ -28,6 +28,7 @@ import okio.buffer
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.zip.Inflater
+import okio.FileHandle
 
 /**
  * Read only access to a [zip file][zip_format] and common [extra fields][extra_fields].
@@ -98,6 +99,10 @@ class ZipFileSystem internal constructor(
     val cursor = source.cursor()!!
     cursor.seek(entry.offset)
     return source.readLocalHeader(basicMetadata)
+  }
+
+  override fun open(file: Path): FileHandle {
+    throw UnsupportedOperationException("not implemented yet!")
   }
 
   override fun list(dir: Path): List<Path> {

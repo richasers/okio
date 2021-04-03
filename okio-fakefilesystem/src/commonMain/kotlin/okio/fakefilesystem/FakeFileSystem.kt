@@ -15,12 +15,15 @@
  */
 package okio.fakefilesystem
 
+import kotlin.jvm.JvmField
+import kotlin.jvm.JvmName
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import okio.Buffer
 import okio.ByteString
 import okio.Cursor
 import okio.ExperimentalFileSystem
+import okio.FileHandle
 import okio.FileMetadata
 import okio.FileNotFoundException
 import okio.FileSystem
@@ -34,8 +37,6 @@ import okio.fakefilesystem.FakeFileSystem.Element.Directory
 import okio.fakefilesystem.FakeFileSystem.Element.File
 import okio.fakefilesystem.FakeFileSystem.Operation.READ
 import okio.fakefilesystem.FakeFileSystem.Operation.WRITE
-import kotlin.jvm.JvmField
-import kotlin.jvm.JvmName
 
 /**
  * A fully in-memory file system useful for testing. It includes features to support writing
@@ -235,6 +236,10 @@ class FakeFileSystem(
     }
     paths.sort()
     return paths
+  }
+
+  override fun open(file: Path): FileHandle {
+    throw UnsupportedOperationException("not implemented yet!")
   }
 
   override fun source(file: Path): Source {
